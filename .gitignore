@@ -1,0 +1,19 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Temporary caches
+*.pkl
+obs_cache*.pkl
+.cache/
+.pytest_cache/
+
+# OS artifacts
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Raw evidence datasets containing synthetic PII / evidence binaries
+dataset/evidence/

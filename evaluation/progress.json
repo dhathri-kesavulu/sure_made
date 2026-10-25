@@ -1,0 +1,35 @@
+{
+  "milestone": "Milestone 1 — Baseline Recovery & Verification",
+  "status": "IN_PROGRESS",
+  "timestamp": "2026-10-25T16:58:00+05:30",
+  "baseline_reproduced": true,
+  "metrics": {
+    "sample_cases": 32,
+    "status_accuracy": 0.90625,
+    "exact_case_accuracy": 0.5,
+    "step_precision": 0.9534883720930233,
+    "step_recall": 0.8497409326424871,
+    "sequence_accuracy": 0.5,
+    "field_accuracy": {
+      "phase": 0.8601036269430051,
+      "system_id": 0.8601036269430051,
+      "resource_id": 0.8601036269430051,
+      "operation": 0.8601036269430051,
+      "state": 0.8601036269430051,
+      "evidence_id": 0.8497409326424871
+    }
+  },
+  "last_successful_run": "sample_predictions_checkpoint.csv",
+  "last_test_results": {
+    "total_tests": 23,
+    "passed": 23,
+    "failed": 0,
+    "duration_seconds": 0.003
+  },
+  "current_unresolved_issues": [
+    "Sample cases 01-10 sequence/status divergence",
+    "Sample cases 18, 20, 23, 24, 29, 30 missing audit_record_* identifiers",
+    "Heuristic batch matching in analytics resources",
+    "PDF and PNG extraction coverage"
+  ]
+}
