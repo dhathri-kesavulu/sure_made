@@ -491,8 +491,7 @@ The competition submission package includes:
 
 ## License
 
-The source code and documentation of this audit engine are proposed to be licensed under the **MIT License**.
+The source code and documentation of this audit engine are licensed under the **MIT License** — see the [LICENSE](LICENSE) file for complete terms.
 
 > **Important Scope Notice**: A source-code license applies strictly to the software implementation developed in this repository. It does **not** grant ownership or redistribution rights over the third-party hackathon problem statement, organizer evidence files, synthetic datasets, or proprietary schemas supplied as part of the competition.
 
-*To finalize repository licensing, see the pending approval prompt in the project tracking documentation.*
