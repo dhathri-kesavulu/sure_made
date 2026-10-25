@@ -1,0 +1,4 @@
+# Core runtime relies primarily on Python standard library (Python 3.10+)
+# Optional dependencies for multi-modal PDF parsing and experimental graph traversal:
+pypdf>=3.0.0
+networkx>=3.0.0

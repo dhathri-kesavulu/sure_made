@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1128" />
+      <stop offset="100%" stop-color="#101f42" />
+    </linearGradient>
+    <linearGradient id="boxBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162955" />
+      <stop offset="100%" stop-color="#132040" />
+    </linearGradient>
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ADB5" />
+      <stop offset="100%" stop-color="#64DFDF" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="520" rx="12" fill="url(#bg)" stroke="#1e3567" stroke-width="2"/>
+
+  <!-- Title Badge -->
+  <rect x="40" y="28" width="190" height="28" rx="6" fill="#132850" stroke="#00ADB5" stroke-width="1"/>
+  <text x="52" y="47" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#64DFDF" letter-spacing="1">SYSTEM ARCHITECTURE</text>
+  <text x="40" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">Ghost Data Still Exists: Forensic Deletion Engine</text>
+
+  <!-- 1. Input Layer -->
+  <g transform="translate(40, 115)">
+    <rect width="260" height="175" rx="8" fill="url(#boxBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="34" rx="8" fill="#1b3260"/>
+    <text x="16" y="22" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#A3CEF1">1. INGESTION &amp; CLASSIFICATION</text>
+    
+    <rect x="14" y="46" width="232" height="34" rx="5" fill="#0d1b38" stroke="#2a457a" stroke-width="1"/>
+    <text x="24" y="67" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">518 Deletion Requests (CSV)</text>
+    
+    <rect x="14" y="88" width="232" height="34" rx="5" fill="#0d1b38" stroke="#2a457a" stroke-width="1"/>
+    <text x="24" y="109" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">Request Intent Filter (is_deletion)</text>
+
+    <rect x="14" y="130" width="232" height="34" rx="5" fill="#0d1b38" stroke="#2a457a" stroke-width="1"/>
+    <text x="24" y="151" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#64DFDF">Bi-Temporal Identity Resolver</text>
+  </g>
+
+  <!-- 2. Multi-Format Evidence Engine -->
+  <g transform="translate(350, 115)">
+    <rect width="260" height="175" rx="8" fill="url(#boxBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="34" rx="8" fill="#1b3260"/>
+    <text x="16" y="22" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#A3CEF1">2. EVIDENCE EXTRACTION</text>
+
+    <text x="16" y="58" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#8EAECF">Heterogeneous Ingestion (94 files):</text>
+    <text x="24" y="78" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">• SQL Snapshots (Postgres/MySQL)</text>
+    <text x="24" y="98" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">• Syslog &amp; Pipe Log Streams</text>
+    <text x="24" y="118" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">• Customer Data JSON Bundles</text>
+    <text x="24" y="138" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">• Support Attachments (pypdf/OCR)</text>
+    <text x="24" y="158" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#64DFDF">→ Unified Observation Index</text>
+  </g>
+
+  <!-- 3. Policy & Audit Engine -->
+  <g transform="translate(660, 115)">
+    <rect width="260" height="175" rx="8" fill="url(#boxBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="34" rx="8" fill="#1b3260"/>
+    <text x="16" y="22" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#A3CEF1">3. FORENSIC AUDIT ENGINE</text>
+
+    <rect x="14" y="46" width="232" height="34" rx="5" fill="#0d1b38" stroke="#2a457a" stroke-width="1"/>
+    <text x="24" y="67" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">State Evaluation at audit_at</text>
+
+    <rect x="14" y="88" width="232" height="34" rx="5" fill="#0d1b38" stroke="#2a457a" stroke-width="1"/>
+    <text x="24" y="109" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">404 Suppression Guard</text>
+
+    <rect x="14" y="130" width="232" height="34" rx="5" fill="#0d1b38" stroke="#2a457a" stroke-width="1"/>
+    <text x="24" y="151" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#E0E1DD">Statutory Retention Engine</text>
+  </g>
+
+  <!-- Flow Arrows (Top to Bottom) -->
+  <line x1="300" y1="202" x2="350" y2="202" stroke="#00ADB5" stroke-width="2" stroke-dasharray="4"/>
+  <line x1="610" y1="202" x2="660" y2="202" stroke="#00ADB5" stroke-width="2" stroke-dasharray="4"/>
+
+  <!-- 4. Decision Synthesis & Verification Output Layer -->
+  <g transform="translate(40, 320)">
+    <rect width="880" height="165" rx="8" fill="url(#boxBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="880" height="34" rx="8" fill="#1b3260"/>
+    <text x="20" y="22" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#A3CEF1">4. DECISION SYNTHESIS &amp; VALIDATED OUTPUT GENERATION</text>
+
+    <!-- Branch A: Incomplete -->
+    <rect x="20" y="48" width="265" height="102" rx="6" fill="#0d1b38" stroke="#f28b82" stroke-width="1"/>
+    <text x="32" y="72" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#f28b82">STATUS: INCOMPLETE (347)</text>
+    <text x="32" y="93" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">1. FINDINGS (cites evidence)</text>
+    <text x="32" y="112" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">2. REMEDIATION (target: ABSENT)</text>
+    <text x="32" y="131" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">3. VERIFICATION (evidence: "")</text>
+
+    <!-- Branch B: Complete -->
+    <rect x="307" y="48" width="265" height="102" rx="6" fill="#0d1b38" stroke="#81c995" stroke-width="1"/>
+    <text x="319" y="72" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#81c995">STATUS: COMPLETE (161)</text>
+    <text x="319" y="93" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">1. VERIFICATION ONLY</text>
+    <text x="319" y="112" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">• Primary: VERIFY_RECORD_ABSENT</text>
+    <text x="319" y="131" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">• Statutory: VERIFY_RECORD_PRESENT</text>
+
+    <!-- Branch C: Not Applicable -->
+    <rect x="595" y="48" width="265" height="102" rx="6" fill="#0d1b38" stroke="#fdd663" stroke-width="1"/>
+    <text x="607" y="72" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#fdd663">STATUS: NOT_APPLICABLE (10)</text>
+    <text x="607" y="93" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">• Data Portability Requests</text>
+    <text x="607" y="112" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">• Credential Update Requests</text>
+    <text x="607" y="131" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#64DFDF">• steps_json = [] (Strictly Empty)</text>
+  </g>
+</svg>

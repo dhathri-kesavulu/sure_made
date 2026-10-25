@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1128" />
+      <stop offset="100%" stop-color="#101f42" />
+    </linearGradient>
+    <linearGradient id="stepBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162955" />
+      <stop offset="100%" stop-color="#111f3c" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="480" rx="12" fill="url(#bg)" stroke="#1e3567" stroke-width="2"/>
+
+  <!-- Header -->
+  <rect x="40" y="28" width="220" height="28" rx="6" fill="#132850" stroke="#00ADB5" stroke-width="1"/>
+  <text x="52" y="47" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#64DFDF" letter-spacing="1">EVIDENCE-TO-DECISION PIPELINE</text>
+  <text x="40" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">Deterministic Audit Workflow</text>
+
+  <!-- Stage 1 -->
+  <g transform="translate(40, 120)">
+    <rect width="195" height="230" rx="8" fill="url(#stepBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="195" height="36" rx="8" fill="#1b3260"/>
+    <text x="14" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#64DFDF">STAGE 1</text>
+    <text x="75" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#E0E1DD">Request Filter</text>
+
+    <text x="14" y="65" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Intent Regex</text>
+    <text x="14" y="85" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• Deletion words check</text>
+    <text x="14" y="105" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• Data copy filter</text>
+    <text x="14" y="125" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• Account retention filter</text>
+
+    <rect x="14" y="150" width="167" height="60" rx="5" fill="#0d1b38" stroke="#3a5a8c" stroke-width="1"/>
+    <text x="24" y="172" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#fdd663">Branch: NOT_APPLICABLE</text>
+    <text x="24" y="193" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#E0E1DD">steps_json = []</text>
+  </g>
+
+  <!-- Arrow 1->2 -->
+  <line x1="235" y1="235" x2="265" y2="235" stroke="#00ADB5" stroke-width="2"/>
+  <polygon points="265,230 275,235 265,240" fill="#00ADB5"/>
+
+  <!-- Stage 2 -->
+  <g transform="translate(275, 120)">
+    <rect width="195" height="230" rx="8" fill="url(#stepBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="195" height="36" rx="8" fill="#1b3260"/>
+    <text x="14" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#64DFDF">STAGE 2</text>
+    <text x="75" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#E0E1DD">Identity Resolution</text>
+
+    <text x="14" y="65" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Temporal Intervals</text>
+    <text x="14" y="85" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• [valid_from, valid_to]</text>
+    <text x="14" y="105" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• Primary/historical emails</text>
+    <text x="14" y="125" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• SHA-256 email digests</text>
+    <text x="14" y="145" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• Normalized phone nums</text>
+
+    <rect x="14" y="165" width="167" height="48" rx="5" fill="#0d1b38" stroke="#3a5a8c" stroke-width="1"/>
+    <text x="24" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" fill="#64DFDF">Contamination Guard</text>
+    <text x="24" y="200" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#E0E1DD">Drops out-of-interval tokens</text>
+  </g>
+
+  <!-- Arrow 2->3 -->
+  <line x1="470" y1="235" x2="500" y2="235" stroke="#00ADB5" stroke-width="2"/>
+  <polygon points="500,230 510,235 500,240" fill="#00ADB5"/>
+
+  <!-- Stage 3 -->
+  <g transform="translate(510, 120)">
+    <rect width="195" height="230" rx="8" fill="url(#stepBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="195" height="36" rx="8" fill="#1b3260"/>
+    <text x="14" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#64DFDF">STAGE 3</text>
+    <text x="75" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#E0E1DD">State Audit</text>
+
+    <text x="14" y="65" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">State at audit_at</text>
+    <text x="14" y="85" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• Filter ts &lt;= audit_at</text>
+    <text x="14" y="105" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• Snapshot tie-break</text>
+    <text x="14" y="125" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">• 404 completed guard</text>
+
+    <rect x="14" y="150" width="167" height="60" rx="5" fill="#0d1b38" stroke="#3a5a8c" stroke-width="1"/>
+    <text x="24" y="172" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#A3CEF1">Policy Conformance</text>
+    <text x="24" y="193" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#E0E1DD">deletion_rules.csv rules</text>
+  </g>
+
+  <!-- Arrow 3->4 -->
+  <line x1="705" y1="235" x2="735" y2="235" stroke="#00ADB5" stroke-width="2"/>
+  <polygon points="735,230 745,235 735,240" fill="#00ADB5"/>
+
+  <!-- Stage 4 -->
+  <g transform="translate(745, 120)">
+    <rect width="175" height="230" rx="8" fill="url(#stepBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="175" height="36" rx="8" fill="#1b3260"/>
+    <text x="14" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#64DFDF">STAGE 4</text>
+    <text x="75" y="23" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#E0E1DD">Synthesis</text>
+
+    <text x="14" y="65" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Canonical Output</text>
+    <text x="14" y="85" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">1. Phase Order</text>
+    <text x="14" y="105" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">2. Operation Rank</text>
+    <text x="14" y="125" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">3. System &amp; Resource</text>
+    <text x="14" y="145" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#A3CEF1">4. Step No (1, 2, 3..)</text>
+
+    <rect x="14" y="165" width="147" height="48" rx="5" fill="#0d1b38" stroke="#81c995" stroke-width="1"/>
+    <text x="24" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" fill="#81c995">Validator Verified</text>
+    <text x="24" y="200" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#E0E1DD">output.csv (518 rows)</text>
+  </g>
+
+  <!-- Bottom Banner -->
+  <rect x="40" y="380" width="880" height="60" rx="8" fill="#132448" stroke="#1f3b73" stroke-width="1"/>
+  <text x="60" y="415" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#64DFDF">Strict Zero-Hallucination Guarantees:</text>
+  <text x="325" y="415" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#E0E1DD">Every FINDING cites authentic evidence_id • REMEDIATION cites "" • Monotonic consecutive numbering</text>
+</svg>

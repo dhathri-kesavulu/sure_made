@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1128" />
+      <stop offset="100%" stop-color="#101f42" />
+    </linearGradient>
+    <linearGradient id="boxBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162955" />
+      <stop offset="100%" stop-color="#132040" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="440" rx="12" fill="url(#bg)" stroke="#1e3567" stroke-width="2"/>
+
+  <!-- Header -->
+  <rect x="40" y="28" width="260" height="28" rx="6" fill="#132850" stroke="#00ADB5" stroke-width="1"/>
+  <text x="52" y="47" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#64DFDF" letter-spacing="1">BI-TEMPORAL RECONSTRUCTION</text>
+  <text x="40" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">Identity Lifecycle &amp; Contamination Guard</text>
+
+  <!-- Main Timeline Container -->
+  <g transform="translate(40, 115)">
+    <rect width="880" height="285" rx="8" fill="url(#boxBg)" stroke="#2b477d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="880" height="34" rx="8" fill="#1b3260"/>
+    <text x="20" y="22" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#A3CEF1">TEMPORAL INTERVAL MAPPING: [valid_from, valid_to]</text>
+
+    <!-- Timeline Axis -->
+    <line x1="60" y1="90" x2="820" y2="90" stroke="#3a5a8c" stroke-width="3"/>
+    
+    <!-- Time Points -->
+    <circle cx="100" cy="90" r="6" fill="#64DFDF"/>
+    <text x="80" y="70" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#A3CEF1">T0: Account Created</text>
+    <text x="80" y="115" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#C5D3E8">user_id: usr_4402</text>
+
+    <circle cx="340" cy="90" r="6" fill="#64DFDF"/>
+    <text x="290" y="70" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#A3CEF1">T1: Email Updated</text>
+    <text x="270" y="115" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#C5D3E8">old@domain.com → new@domain.com</text>
+
+    <circle cx="580" cy="90" r="6" fill="#fdd663"/>
+    <text x="535" y="70" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#fdd663">T2: Deletion Requested</text>
+    <text x="540" y="115" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#C5D3E8">requested_at</text>
+
+    <circle cx="760" cy="90" r="6" fill="#f28b82"/>
+    <text x="725" y="70" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#f28b82">T3: Audit Snapshot</text>
+    <text x="740" y="115" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#C5D3E8">audit_at</text>
+
+    <!-- Interval 1 Bar -->
+    <rect x="100" y="145" width="240" height="26" rx="4" fill="#193a6b" stroke="#00ADB5" stroke-width="1.5"/>
+    <text x="115" y="162" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#64DFDF">Token A (old@): Valid [T0, T1]</text>
+
+    <!-- Interval 2 Bar -->
+    <rect x="340" y="145" width="460" height="26" rx="4" fill="#154359" stroke="#48E5C2" stroke-width="1.5"/>
+    <text x="355" y="162" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#48E5C2">Token B (new@): Valid [T1, 9999]</text>
+
+    <!-- Interval 3 (Hashed representation) -->
+    <rect x="100" y="185" width="700" height="26" rx="4" fill="#1b2e55" stroke="#3a5a8c" stroke-width="1"/>
+    <text x="115" y="202" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#C5D3E8">SHA-256 Hashes &amp; User ID: Globally Attributed to user_id across full audit window</text>
+
+    <!-- Explanation Box -->
+    <rect x="20" y="225" width="840" height="46" rx="6" fill="#0d1b38" stroke="#254275" stroke-width="1"/>
+    <text x="35" y="253" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#64DFDF">Contamination Guard Logic:</text>
+    <text x="220" y="253" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#E0E1DD">If Token A appears at T &gt; T1, it is marked ambiguous and attributed ONLY if the observation timestamp falls within [T0, T1].</text>
+  </g>
+</svg>
