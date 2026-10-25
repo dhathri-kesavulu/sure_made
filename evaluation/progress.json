@@ -1,35 +1,57 @@
 {
-  "milestone": "Milestone 1 — Baseline Recovery & Verification",
-  "status": "IN_PROGRESS",
-  "timestamp": "2026-10-25T16:58:00+05:30",
+  "milestone": "Milestone 3 — Production Packaging & Submission Verification",
+  "status": "COMPLETED",
+  "timestamp": "2026-10-25T17:45:00+05:30",
   "baseline_reproduced": true,
   "metrics": {
     "sample_cases": 32,
-    "status_accuracy": 0.90625,
-    "exact_case_accuracy": 0.5,
-    "step_precision": 0.9534883720930233,
-    "step_recall": 0.8497409326424871,
-    "sequence_accuracy": 0.5,
+    "status_accuracy": 1.0,
+    "exact_case_accuracy": 0.90625,
+    "step_precision": 0.9947643979057592,
+    "step_recall": 0.9844559585492227,
+    "sequence_accuracy": 0.90625,
     "field_accuracy": {
-      "phase": 0.8601036269430051,
-      "system_id": 0.8601036269430051,
-      "resource_id": 0.8601036269430051,
-      "operation": 0.8601036269430051,
-      "state": 0.8601036269430051,
-      "evidence_id": 0.8497409326424871
+      "phase": 0.9844559585492227,
+      "system_id": 0.9844559585492227,
+      "resource_id": 0.9844559585492227,
+      "operation": 0.9844559585492227,
+      "state": 0.9844559585492227,
+      "evidence_id": 0.9844559585492227
     }
   },
-  "last_successful_run": "sample_predictions_checkpoint.csv",
-  "last_test_results": {
-    "total_tests": 23,
-    "passed": 23,
-    "failed": 0,
-    "duration_seconds": 0.003
+  "full_dataset_validation": {
+    "output_file": "output.csv",
+    "total_rows": 518,
+    "status_breakdown": {
+      "INCOMPLETE": 347,
+      "COMPLETE": 161,
+      "NOT_APPLICABLE": 10
+    },
+    "total_steps": 3240,
+    "phase_breakdown": {
+      "FINDING": 713,
+      "REMEDIATION": 713,
+      "VERIFICATION": 1814
+    },
+    "errors": 0,
+    "warnings": 0,
+    "validation_passed": true
   },
-  "current_unresolved_issues": [
-    "Sample cases 01-10 sequence/status divergence",
-    "Sample cases 18, 20, 23, 24, 29, 30 missing audit_record_* identifiers",
-    "Heuristic batch matching in analytics resources",
-    "PDF and PNG extraction coverage"
+  "test_suite": {
+    "total_tests": 28,
+    "passed": 28,
+    "failed": 0,
+    "duration_seconds": 0.022
+  },
+  "resolved_issues": [
+    "Pipe-delimited syslog parsing (recovered 231 vital operations stream records)",
+    "Intent classification refinement distinguishing data copy requests from deletions",
+    "Missing audit_record_* evidence recovery via fallback timestamp indexing",
+    "Multi-format document ingestion via pypdf and OCR token binding",
+    "Race condition / 404 ABSENT resource suppression on started/completed log pairs"
+  ],
+  "documented_anomalies": [
+    "Cases 18 and 20 ground-truth cite audit_record_6645 and audit_record_5569 which do not exist in any evidence file (prevented hallucination)",
+    "Case 23 batch rank reflects 1-item sample subset of 3-case batch"
   ]
 }

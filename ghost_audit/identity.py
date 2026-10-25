@@ -11,8 +11,8 @@ from .common import *
 
 class Identity:
     def __init__(self, ds):
-        self.users = {r['user_id']: r for r in csv.DictReader(open(os.path.join(ds, 'user_identities.csv')))}
-        self.audit = sorted(csv.DictReader(open(os.path.join(ds, 'user_audit_log.csv'))), key=lambda r: r['event_time'])
+        self.users = {r['user_id']: r for r in csv.DictReader(open(os.path.join(ds, 'user_identities.csv'), encoding='utf-8', errors='replace'))}
+        self.audit = sorted(csv.DictReader(open(os.path.join(ds, 'user_audit_log.csv'), encoding='utf-8', errors='replace')), key=lambda r: r['event_time'])
         self.intervals = collections.defaultdict(list)   # token -> [(user, start, end)]
         self._build()
 

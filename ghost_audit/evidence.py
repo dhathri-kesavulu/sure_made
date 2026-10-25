@@ -16,7 +16,7 @@ EXPLICIT = {'FOUND', 'NOT_FOUND', 'IDENTIFIABLE', 'REDACTED', 'ANONYMIZED', 'ACT
 
 
 def load_manifest(ds):
-    return {r['file_id']: r for r in csv.DictReader(open(os.path.join(ds, 'evidence_files.csv')))}
+    return {r['file_id']: r for r in csv.DictReader(open(os.path.join(ds, 'evidence_files.csv'), encoding='utf-8', errors='replace'))}
 
 
 def clean(v):
@@ -112,9 +112,20 @@ def text_records(txt):
 
 @functools.lru_cache(maxsize=None)
 def ocr_text(path):
-    try:
-        if path.endswith('.pdf'):
+    if path.endswith('.pdf'):
+        try:
+            import pypdf
+            reader = pypdf.PdfReader(path)
+            txt = '\n'.join([page.extract_text() or '' for page in reader.pages])
+            if txt.strip():
+                return txt
+        except Exception:
+            pass
+        try:
             return subprocess.run(['pdftotext', '-layout', path, '-'], capture_output=True, text=True).stdout
+        except Exception:
+            return ''
+    try:
         return subprocess.run(['tesseract', path, '-', '--psm', '6'], capture_output=True, text=True).stdout
     except Exception:
         return ''
@@ -141,12 +152,18 @@ def log_line(line):
             return d
         except Exception:
             pass
-    if rest.startswith('|') is False and ' | ' in rest and 'event=' not in rest.split('|')[0]:
-        parts = [p.strip() for p in rest.split(' | ')]
-        if len(parts) >= 5 and not parts[0].startswith(('INFO', 'WARN')) or len(parts) >= 6:
-            d['service'], d['trace_id'], d['event'] = parts[2], parts[3], parts[4]
-            d.update(parse_kv(' | '.join(parts[5:])))
-            return d
+    if ' | ' in rest:
+        s = rest.strip('| ').strip()
+        parts = [p.strip() for p in s.split(' | ')]
+        if len(parts) >= 4:
+            if parts[0] in ('DEBUG', 'INFO', 'WARN', 'ERROR', 'TRACE'):
+                d['level'], d['service'], d['trace_id'], d['event'] = parts[0], parts[1], parts[2], parts[3]
+                d.update(parse_kv(' | '.join(parts[4:])))
+                return d
+            else:
+                d['service'], d['trace_id'], d['event'] = parts[0], parts[1], parts[2]
+                d.update(parse_kv(' | '.join(parts[3:])))
+                return d
     m2 = re.match(r'\[(\w+)\]\s*\[(\w+)\]\s*\[(.+?)\]\s*(\w+):\s*(.*)', rest)
     if m2:
         d.update({'service': m2[2], 'trace_id': m2[3], 'event': m2[4]}); d.update(parse_kv(m2[5])); return d
@@ -180,11 +197,18 @@ def log_records(path):
         for d in ds:                                           # context from "started" lines
             for k in ('lookup_key', 'match_key', 'subject_key', 'scan_key', 'owner_key', 'subject_ref', 'correlation_key'):
                 if d.get(k): keys.setdefault('_keys', set()).add(d[k])
+        has_completed = any(d.get('event', '').endswith(('completed', 'check', 'saved', 'failed')) for d in ds)
         for d in ds:
+            ev = d.get('event', '')
+            if has_completed and ev.endswith('_started'):
+                continue
             rid = d.get('resource_id')
-            if rid and rid_prefix(rid) and d.get('event', '').endswith(('completed', 'read', 'scan', 'loaded', 'evaluated', 'heartbeat', 'check', 'metadata_read_completed')) or (rid and rid_prefix(rid) and d.get('event') not in ('thumbnail_failed',)):
-                r = dict(d); r['_keys'] = set(keys.get('_keys', set())); r['recorded_at'] = d['ts']
-                out.append(r)
+            if rid and rid_prefix(rid):
+                if ev.endswith('_started') and not d.get('result') and not d.get('rows') and not d.get('http_status'):
+                    continue
+                if ev.endswith(('completed', 'read', 'scan', 'loaded', 'evaluated', 'heartbeat', 'check', 'metadata_read_completed')) or ev not in ('thumbnail_failed',):
+                    r = dict(d); r['_keys'] = set(keys.get('_keys', set())); r['recorded_at'] = d['ts']
+                    out.append(r)
     return out
 
 
@@ -235,7 +259,7 @@ def interpret(rec):
     elif p == 'search':
         state = 'FOUND'
     elif p == 'support':
-        if rec.get('file_name') or rec.get('uploaded_by') or ev.startswith('attachment'):
+        if rec.get('file_name') or rec.get('uploaded_by') or ev.startswith('attachment') or 'attachment' in str(rec.get('_file_path', '')) or rec.get('source') == 'legacy_contact_index' or 'contact' in ev or rec.get('service') == 'support_replica':
             rtype = 'SUPPORT_ATTACHMENT'; state = 'FOUND'
         else:
             state = 'IDENTIFIABLE' if direct else 'REDACTED'
@@ -278,13 +302,13 @@ def build_observations(ds):
         cap = m['captured_at']
         try:
             if ext == 'json':
-                recs = json_records(json.load(open(path)))
+                recs = json_records(json.load(open(path, encoding='utf-8', errors='replace')))
             elif ext == 'sql':
                 recs, scope, c2 = sql_records(path)
             elif ext == 'log':
                 recs = log_records(path)
             elif ext in ('txt', 'png', 'pdf'):
-                txt = open(path).read() if ext == 'txt' else ocr_text(path)
+                txt = open(path, encoding='utf-8', errors='replace').read() if ext == 'txt' else ocr_text(path)
                 recs = text_records(txt)
                 if ext != 'txt':
                     recs += ocr_free_records(txt, cap)
@@ -294,6 +318,7 @@ def build_observations(ds):
             print('WARN parse failed', fid, e)
             recs = []
         for r in recs:
+            r['_file_path'] = path
             if r.get('subject_reference') and 'resource_id' in r and r.get('result'):
                 r = dict(r); r['_keys'] = {r['subject_reference']}
                 r['subject_reference'] = r['subject_reference']
@@ -308,9 +333,12 @@ def build_observations(ds):
 
 
 def ocr_free_records(txt, cap):
-    """Images/PDFs: pull any resource id with nearby identifier tokens (one record per line containing a resource id)."""
+    """Images/PDFs: pull any resource id with nearby identifier tokens (fallback to document tokens)."""
     out = []
+    doc_toks = tokens_in(txt)
     for line in txt.splitlines():
         for m in RID_RE.finditer(line):
-            out.append({'resource_id': m.group(0), 'captured_at': cap, **{'_keys': tokens_in(line)}})
+            line_toks = tokens_in(line)
+            keys = line_toks if line_toks else doc_toks
+            out.append({'resource_id': m.group(0), 'captured_at': cap, **{'_keys': keys}})
     return out

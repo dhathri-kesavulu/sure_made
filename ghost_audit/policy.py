@@ -24,7 +24,7 @@ FIND_STATE = {'REPORT_REMAINING_RECORD': 'PRESENT', 'REPORT_EXPOSED_PII': 'PRESE
 
 class Policy:
     def __init__(self, ds):
-        self.rules = {r['data_category']: r for r in csv.DictReader(open(os.path.join(ds, 'deletion_rules.csv')))}
+        self.rules = {r['data_category']: r for r in csv.DictReader(open(os.path.join(ds, 'deletion_rules.csv'), encoding='utf-8', errors='replace'))}
 
     def treatment(self, rtype):
         """-> (viol_states, find_op, rem_op, ver_op, ver_state) or None if no rule applies"""

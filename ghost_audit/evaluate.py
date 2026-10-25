@@ -2,7 +2,7 @@
 import csv, json, sys
 
 
-def load(p): return {r['case_id']: (r['deletion_status'], json.loads(r['steps_json'])) for r in csv.DictReader(open(p))}
+def load(p): return {r['case_id']: (r['deletion_status'], json.loads(r['steps_json'])) for r in csv.DictReader(open(p, encoding='utf-8', errors='replace'))}
 F = ['phase', 'system_id', 'resource_id', 'operation', 'state', 'evidence_id']
 
 

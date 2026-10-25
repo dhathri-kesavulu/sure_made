@@ -4,11 +4,13 @@ __pycache__/
 *$py.class
 *.pyd
 
-# Temporary caches
+# Temporary caches and scratch
 *.pkl
 obs_cache*.pkl
 .cache/
 .pytest_cache/
+scratch/
+test_sample.csv
 
 # OS artifacts
 Thumbs.db

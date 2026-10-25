@@ -17,7 +17,7 @@ def load(ds, cache=None):
 def run(ds, requests_csv, out_csv, cache=None):
     eng = load(ds, cache)
     rows = []
-    reqs = list(csv.DictReader(open(os.path.join(ds, requests_csv))))
+    reqs = list(csv.DictReader(open(os.path.join(ds, requests_csv), encoding='utf-8', errors='replace')))
     eng.prepare(reqs)
     eng.prepare_complete_groups(reqs)
     for req in reqs:
